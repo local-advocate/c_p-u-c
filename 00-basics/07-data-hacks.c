@@ -21,7 +21,11 @@ int main(){
 	 * 						4a6.yyy returns 004
 	 * 						45a.yyy returns 045
 	 * 						456.yyy returns 456
-	 * 						
+	 * 
+	 * long int atol(const char *str)	:	string to long int (same as atoi but long qualifier)
+	 *
+	 * double strtod(const char *str, char **endptr) : returns double like atof and endptr = str location
+	 * 						   a13.129 -- ret: 000.000, endptr: &str[0]
 	 */
 
 
