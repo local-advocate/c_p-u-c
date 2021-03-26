@@ -31,8 +31,12 @@ int main(){
 	 *						   123.a12 -- dbret: 123.000, endptr: &"a12"
 	 *						   123.1a1 -- dbret: 123.100, endptr: &"a1"
 	 *						   123.12a -- dbret: 123.120, endptr: &"a"
-	 *						   123.123 -- dbret: 123.123, endptr: NULL?
-	 * 		
+	 *						   123.123 -- dbret: 123.123, endptr: &(not null ptr)
+	 *
+	 * long int strtol(const char *str, char **endptr, int base) : same as strtod, but return in base
+	 * 							       test diff bases (and for zero)	
+	 * long int strtoul(const char *str, char **endptr, int base) : same as strtod, but return in base
+	 * 							       test diff bases (and for zero)	
 	 */
 
 
@@ -51,7 +55,7 @@ int main(){
 	float f2;
 
 	char *str1  = "string1";
-	char str2[] = "123.11a";
+	char str2[] = "12a.a12";
 	char *str3 = "45a.)))";
 	char *str4 = NULL;
 
