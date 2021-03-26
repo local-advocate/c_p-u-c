@@ -1,4 +1,6 @@
 /basics/*.out
+/basics/*.o
+/basics/*.elf
 
 
 ./*/*.out
