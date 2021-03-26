@@ -1,3 +1,6 @@
-/*.out
-/*.elf
-/*.o
+/basics/*.out
+
+
+./*/*.out
+./*/*.elf
+./*/*.o
