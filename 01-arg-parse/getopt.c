@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
 	
 	char *a_arg, *c_arg;					// arg: argument for option (if present)
 
-	while ((c = getopt(argc, argv, "a:bc:")) != -1) {		// if -1 then done
+	while ((c = getopt(argc, argv, "a:bc:")) != -1) {	// if -1 then done
 	
 		switch (c) {
 			
@@ -63,7 +63,6 @@ int main(int argc, char **argv) {
 				printf("Option = 'c', Argument = %s\n", optarg);
 				break;
 
-			
 			/*  
 			 * getopt does not return : but handles it internally in my case
 			 * can implement ':' with switch optopt but would let getopt take care of it
@@ -74,18 +73,25 @@ int main(int argc, char **argv) {
 			 *	break;
 			 */
 
-
 			// how to disable getopt message "argv[0]: invalid option -- 'optopt'"
 			case '?':
 				printf("Unknown option: %c at index %d\n", optopt, optind);
 				break;
 
-
 			default:
 				printf("Usage: %s -[abc]\n", argv[0]);
 				exit(0);
 		}
+		
+		printf("\n");
+	}
 
+	/* 
+	 * printing nonoptions (only works if option format is invalid [doesnt start with '-'])
+	 * works since all invalid format get rearragned to be positioned at the end
+	 */	
+	for (index = optind; index < argc; index++) {
+		printf("Unknown option: %s at index %d\n", argv[index], index);
 	}
 
 }
