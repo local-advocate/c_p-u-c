@@ -3,8 +3,9 @@ f2 = "02-data-types.c"
 f3 = "03-qualifiers.c" 
 f4 = "04-predefDS.c" 
 f5 = "05-pointers.c"
+f6 = "06-arg-parse.c"
 
-curr = $(f5)
+curr = $(f6)
 
 exec:  
 	gcc $(curr) -c -o obj.o
