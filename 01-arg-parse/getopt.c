@@ -40,25 +40,29 @@
 int main(int argc, char **argv) {
 	
 	int c;							// c: option to be read
-	char *arg;						// arg: argument for option (if present)
 	int index;						// index of non-option
 	int opterr = 0;						// to not print error message
+	
+	char *a_arg, *c_arg;					// arg: argument for option (if present)
 
 	while ((c = getopt(argc, argv, "a:bc:")) != -1) {		// if -1 then done
 	
 		switch (c) {
 			
 			case 'a':
-				printf("Argument = 'a'\n");
+				a_arg = optarg;
+				printf("Option = 'a', Argument = %s\n", optarg);
 				break;
 
 			case 'b':
-				printf("Argument = 'b'\n");
+				printf("Option = 'b'\n");
 				break;
 
 			case 'c':
-				printf("Argument = 'c'\n");
+				c_arg = optarg;
+				printf("Option = 'c', Argument = %s\n", optarg);
 				break;
+
 			
 			/*  
 			 * getopt does not return : but handles it internally in my case
