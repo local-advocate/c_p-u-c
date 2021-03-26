@@ -35,6 +35,12 @@
  * if finds +, terminates processing
  */
 
-int main() {
+
+int main(int argc, char **argv) {
+	
+	int c;						// c: option to be read
+	char *arg;					// arg: argument for option (if present)
+	int index;					// index of non-option
+	int opterr = 0;					// to not print error message
 
 }
