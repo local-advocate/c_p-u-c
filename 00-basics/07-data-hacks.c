@@ -9,6 +9,12 @@ int main(){
 	 * 
 	 * FUNCTIONS
 	 * double atof(const char *str)		:	string to double (0.0 if can't be converted)
+	 *						a13.129 returns 000.000 (ERR)
+	 *						1a3.129 returns 001.000
+	 *						13a.129 returns 013.000
+	 *						123.a11 returns 123.000
+	 *						123.1a1 returns 123.100
+	 *						123.11a returns 123.110
 	 *
 	 */
 
@@ -27,7 +33,7 @@ int main(){
 	float f2;
 
 	char *str1  = "string1";
-	char str2[] = "9&9.4a1";
+	char str2[] = "123.11a";
 
 	long int l1 = 129900388833l;
 		
