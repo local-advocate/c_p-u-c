@@ -2,7 +2,6 @@
 #include <unistd.h>		// for getopt
 #include <stdlib.h>		// for exit
 
-
 /* NOTES (ref: https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html)
  * command format: <command> -[option] <argument> 
  * 		   if option takes argument: -option argument is same as -optionargument
@@ -36,17 +35,25 @@
  * if finds +, terminates processing
  */
 
+// int opterr = 0; // to disable printing getopt error 
 
 int main(int argc, char **argv) {
+
+	if (argc < 2) {
+		printf("Usage: %s -[abc]\n", argv[0]);
+		exit(-1);
+	}
 	
 	int c;							// c: option to be read
 	int index;						// index of non-option
-	int opterr = 0;						// to not print error message
-	
+	int opterr = 0;						// to not print error message (define global)
+	// DO NOT DO int optind = 0, undefined behavior.	
+
 	int  aflag = 0, bflag = 0, cflag = 0;			// flags to avoid parsing same options again
 	char *a_arg, *c_arg;					// arg: argument for option (if present)
 
-	while ((c = getopt(argc, argv, "a:bc:")) != -1) {	// if -1 then done
+	char *optlist = ":a:bc:";				// : at first then getopt returns ':' 
+	while ((c = getopt(argc, argv, optlist)) != -1) {	// if -1 then done
 	
 		switch (c) {
 			
@@ -69,19 +76,18 @@ int main(int argc, char **argv) {
 			 * can implement ':' with switch optopt but would let getopt take care of it
 			 */
 				
-			/* case ':':
-			 *	printf("Optiooooon %c requires argument\n", optopt);
-			 *	break;
-			 */
+			 case ':':
+			 	printf("Option '-%c' requires an argument.\n", optopt);
+				exit(-1); 
 
 			// how to disable getopt message "argv[0]: invalid option -- 'optopt'"
 			case '?':
-				printf("Unknown option: %c at index %d\n", optopt, optind);
-				break;
+				printf("Unknown option: '-%c' at index %d.\n", optopt, optind);
+				exit(-1);					
 
-			default:
+			default:					// useless since unreachable
 				printf("Usage: %s -[abc]\n", argv[0]);
-				exit(0);
+				exit(-1);
 		}
 		
 	}
@@ -93,9 +99,10 @@ int main(int argc, char **argv) {
 	 */	
 	if (optind != argc) {						// non-options present
 		for (index = optind; index < argc; index++) {
-			printf("Unknown option: %s at index %d\n", argv[index], index);
+			printf("Unknown option: %s at index %d.\n", argv[index], index);
 		}
 		printf("\n");
+		// exit(-1);
 	}
 
 
@@ -103,14 +110,15 @@ int main(int argc, char **argv) {
 	 * now parsing all flags 
 	 * to do: better way to combine and use arguments +
 	 * check and convert argument from string to char, int, or other type
+	 * check if *_arg = NULL ??? or done by getopt since err given if no arg present
 	 */
 	if (aflag) {
-		printf("a argument: %s\n", a_arg);
+		printf("a argument: %s.\n", a_arg);
 	}
 	if (bflag) {
-		printf("bflag true\n");
+		printf("bflag true.\n");
 	}
 	if (cflag) {
-		printf("c argument: %s\n", c_arg);
+		printf("c argument: %s.\n", c_arg);
 	}
 }
