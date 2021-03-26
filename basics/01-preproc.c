@@ -53,7 +53,7 @@ int main(){
 	/*----if, elif----*/
 	#define SIZE 10
 	#if defined SIZE && SIZE > 10
-		printf("size is greater than 10\m");
+		printf("size is greater than 10\n");
 	#elif SIZE - 10 == 0
 		printf("size is 10\n");
 	#else 
