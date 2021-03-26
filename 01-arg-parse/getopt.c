@@ -24,6 +24,15 @@
  * 	param argv    : constant pointer to arguments
  * 	param options : pointer to options (constant literal) 
  * 		        options = string of valid option characters, add : to indicate arguments required, :: opt
+ * 	return value  : returns character/option read, -1 if no more VALID options (compare optind with argc)
+ * 			if option has argument, it is stored in optarg
+ * 			if non-option, sets optopt = non-opt char and returns ? (if opterror == 0)
+ * 			if arg not found but req, returns : (if opterror == 0, else prints error msg)
+ *
+ * WORKING
+ * rearranges all non-option to be at the end
+ * if finds -, attaches the following arg (if present) to it
+ * if finds +, terminates processing
  */
 
 int main() {
