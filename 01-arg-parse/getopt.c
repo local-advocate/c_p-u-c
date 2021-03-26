@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>		// for getopt
+#include <stdlib.h>		// for exit
 
 
 /* NOTES (ref: https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html)
@@ -38,9 +39,32 @@
 
 int main(int argc, char **argv) {
 	
-	int c;						// c: option to be read
-	char *arg;					// arg: argument for option (if present)
-	int index;					// index of non-option
-	int opterr = 0;					// to not print error message
+	int c;							// c: option to be read
+	char *arg;						// arg: argument for option (if present)
+	int index;						// index of non-option
+	int opterr = 7;						// to not print error message
+
+	while ((c = getopt(argc, argv, "abc")) != -1) {		// if -1 then done
+	
+		switch (c) {
+			
+			case 'a':
+				printf("Argument = 'a'\n");
+				break;
+
+			case 'b':
+				printf("Argument = 'b'\n");
+				break;
+
+			case 'c':
+				printf("Argument = 'c'\n");
+				break;
+
+			default:
+				printf("Usage: %s -[abc]\n", argv[0]);
+				exit(0);
+		}
+
+	}
 
 }
