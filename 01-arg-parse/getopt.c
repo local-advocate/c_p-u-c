@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
 	int index;						// index of non-option
 	int opterr = 0;						// to not print error message
 
-	while ((c = getopt(argc, argv, "abc:")) != -1) {		// if -1 then done
+	while ((c = getopt(argc, argv, "a:bc:")) != -1) {		// if -1 then done
 	
 		switch (c) {
 			
@@ -60,10 +60,18 @@ int main(int argc, char **argv) {
 				printf("Argument = 'c'\n");
 				break;
 			
-			case ':':
-				printf("Optiooooon %c requires argument\n", optopt);
-				break;
+			/*  
+			 * getopt does not return : but handles it internally in my case
+			 * can implement ':' with switch optopt but would let getopt take care of it
+			 */
+				
+			/* case ':':
+			 *	printf("Optiooooon %c requires argument\n", optopt);
+			 *	break;
+			 */
 
+
+			// how to disable getopt message "argv[0]: invalid option -- 'optopt'"
 			case '?':
 				printf("Unknown option: %c at index %d\n", optopt, optind);
 				break;
