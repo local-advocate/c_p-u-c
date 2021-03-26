@@ -25,7 +25,14 @@ int main(){
 	 * long int atol(const char *str)	:	string to long int (same as atoi but long qualifier)
 	 *
 	 * double strtod(const char *str, char **endptr) : returns double like atof and endptr = str location
-	 * 						   a13.129 -- ret: 000.000, endptr: &str[0]
+	 * 						   a13.129 -- dbret: 000.000, endptr: &str[0]
+	 *						   1a3.129 -- dbret: 001.000, endptr: &str[1]
+	 *						   13a.129 -- dbret: 013.000, endptr: &str[2]
+	 *						   123.a12 -- dbret: 123.000, endptr: &"a12"
+	 *						   123.1a1 -- dbret: 123.100, endptr: &"a1"
+	 *						   123.12a -- dbret: 123.120, endptr: &"a"
+	 *						   123.123 -- dbret: 123.123, endptr: NULL?
+	 * 		
 	 */
 
 
