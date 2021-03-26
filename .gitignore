@@ -1,8 +1,7 @@
-/basics/*.out
-/basics/*.o
-/basics/*.elf
-
-
+/00-basics/*.out
+*.elf
+*.o
+*.swp
 
 /*/*.out
 /*/*.elf
