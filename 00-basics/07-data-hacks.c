@@ -35,6 +35,7 @@ int main(){
 
 	double d1 = 10.9d;
 	double d2 = 0.0d;
+	double d3 = 0.0d;
 
 	char c1 = 'Z';
 	char c2;
@@ -45,6 +46,7 @@ int main(){
 	char *str1  = "string1";
 	char str2[] = "123.11a";
 	char *str3 = "45a.)))";
+	char *str4 = NULL;
 
 	long int l1 = 129900388833l;
 		
@@ -55,6 +57,14 @@ int main(){
 	}
 	else {
 		printf("ERR OR ZERO. String: %s. Double: %.5lf\n", str2, d2);
+	}
+
+	// string to double w/ pointer to str value start (&str4 because str4 would make local ptr copy)
+	if ((d3 = strtod(str2, &str4)) != 0) {
+		printf("String %s in double is %.5lf ; Remaining string: %s\n", str2, d3, str4);
+	}
+	else {
+		printf("ERR OR ZERO. String: %s. Double: %.5lf\n", str2, d3);
 	}
 
 	// string to int
