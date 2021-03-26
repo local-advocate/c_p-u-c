@@ -2,8 +2,18 @@
 
 
 /* NOTES (im skipping many implementation things due to prior exp. but here are a few notes for reference)
- * 
-
+ *
+ * general format: <type of var> *pointer = &var; n-pointer: <type> (n*)pointer = &var;
+ * function      : <type> (*ptr_name) (arg type) = &function 
+ *
+ * use cases:
+ * 	single pointer: to pass by reference and not make duplicate copies (also useful in dynamic allocation)
+ * 	function pointer: to avoid code duplication
+ *
+ * warning: 
+ * 	returning pointer: do not return local variable pointer ; can return if passed by ref or dynamic alloc
+ * 	careful when typecasting (avoid if possible) [use mostly while dynamically allocating]
+ */
 
 
 void pass_by_value(int a){
@@ -37,4 +47,5 @@ int main(){
 
 	int (*add_ptr) (int, int) = &add;			// pointer to func. & not required
 	printf("a+b: %d\n", add_ptr(10, 20)); 			// (*add_ptr) (10, 20) also works
+
 }
