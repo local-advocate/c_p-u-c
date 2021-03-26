@@ -71,21 +71,15 @@ int main(int argc, char **argv) {
 				c_arg = optarg;
 				break;
 
-			/*  
-			 * getopt does not return : but handles it internally in my case
-			 * can implement ':' with switch optopt but would let getopt take care of it
-			 */
-				
-			 case ':':
+			 case ':':							
 			 	printf("Option '-%c' requires an argument.\n", optopt);
 				exit(-1); 
 
-			// how to disable getopt message "argv[0]: invalid option -- 'optopt'"
 			case '?':
 				printf("Unknown option: '-%c' at index %d.\n", optopt, optind);
 				exit(-1);					
 
-			default:					// useless since unreachable
+			default:					// in case, case ':' or '?' not defined
 				printf("Usage: %s -[abc]\n", argv[0]);
 				exit(-1);
 		}
@@ -99,7 +93,7 @@ int main(int argc, char **argv) {
 	 */	
 	if (optind != argc) {						// non-options present
 		for (index = optind; index < argc; index++) {
-			printf("Unknown option: %s at index %d.\n", argv[index], index);
+			printf("undefined option: '%s' at index %d.\n", argv[index], index);
 		}
 		printf("\n");
 		// exit(-1);
