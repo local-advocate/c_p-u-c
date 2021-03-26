@@ -11,8 +11,7 @@ int main (int argc, char **argv){			// argc = num of arguments, argv = pointer t
 	}
 
 	for (int i = 0; i < argc; i++) {
-		printf("argv[%d]: %s\n", i, argv[argc]);
-		++i;	
+		printf("argv[%d]: %s\n", i, argv[i]);
 	}
 
 }
