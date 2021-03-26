@@ -16,7 +16,7 @@
  * VARIABLES
  * int opterror	: print error if unknown option && int != 0, if zero returns '?'
  * int optopt	: unknown option char or option with missing arg stored in optopt [used to print nondef options]
- * int optint	: index of next elem of array (set by getopt) [use to determine where nondef options start]
+ * int optind	: index of next elem of array (set by getopt) [use to determine where nondef options start]
  * char *optarg : point at value of optional argument
  * 
  * FUNCTIONS
@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 	int c;							// c: option to be read
 	char *arg;						// arg: argument for option (if present)
 	int index;						// index of non-option
-	int opterr = 7;						// to not print error message
+	int opterr = 0;						// to not print error message
 
 	while ((c = getopt(argc, argv, "abc")) != -1) {		// if -1 then done
 	
@@ -58,6 +58,10 @@ int main(int argc, char **argv) {
 
 			case 'c':
 				printf("Argument = 'c'\n");
+				break;
+			
+			case '?':
+				printf("Unknown option: %c at index %d\n", optopt, optind);
 				break;
 
 			default:
