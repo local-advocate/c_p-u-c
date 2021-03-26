@@ -43,6 +43,7 @@ int main(int argc, char **argv) {
 	int index;						// index of non-option
 	int opterr = 0;						// to not print error message
 	
+	int  aflag = 0, bflag = 0, cflag = 0;			// flags to avoid parsing same options again
 	char *a_arg, *c_arg;					// arg: argument for option (if present)
 
 	while ((c = getopt(argc, argv, "a:bc:")) != -1) {	// if -1 then done
@@ -51,16 +52,16 @@ int main(int argc, char **argv) {
 			
 			case 'a':
 				a_arg = optarg;
-				printf("Option = 'a', Argument = %s\n", optarg);
+				aflag = 1;
 				break;
 
 			case 'b':
-				printf("Option = 'b'\n");
+				bflag = 1;
 				break;
 
 			case 'c':
+				cflag = 1;
 				c_arg = optarg;
-				printf("Option = 'c', Argument = %s\n", optarg);
 				break;
 
 			/*  
@@ -83,15 +84,33 @@ int main(int argc, char **argv) {
 				exit(0);
 		}
 		
-		printf("\n");
 	}
+
 
 	/* 
 	 * printing nonoptions (only works if option format is invalid [doesnt start with '-'])
 	 * works since all invalid format get rearragned to be positioned at the end
 	 */	
-	for (index = optind; index < argc; index++) {
-		printf("Unknown option: %s at index %d\n", argv[index], index);
+	if (optind != argc) {						// non-options present
+		for (index = optind; index < argc; index++) {
+			printf("Unknown option: %s at index %d\n", argv[index], index);
+		}
+		printf("\n");
 	}
 
+
+	/*
+	 * now parsing all flags 
+	 * to do: better way to combine and use arguments +
+	 * check and convert argument from string to char, int, or other type
+	 */
+	if (aflag) {
+		printf("a argument: %s\n", a_arg);
+	}
+	if (bflag) {
+		printf("bflag true\n");
+	}
+	if (cflag) {
+		printf("c argument: %s\n", c_arg);
+	}
 }
