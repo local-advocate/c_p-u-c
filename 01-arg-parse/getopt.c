@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
 	int index;						// index of non-option
 	int opterr = 0;						// to not print error message
 
-	while ((c = getopt(argc, argv, "abc")) != -1) {		// if -1 then done
+	while ((c = getopt(argc, argv, "abc:")) != -1) {		// if -1 then done
 	
 		switch (c) {
 			
@@ -60,9 +60,14 @@ int main(int argc, char **argv) {
 				printf("Argument = 'c'\n");
 				break;
 			
+			case ':':
+				printf("Optiooooon %c requires argument\n", optopt);
+				break;
+
 			case '?':
 				printf("Unknown option: %c at index %d\n", optopt, optind);
 				break;
+
 
 			default:
 				printf("Usage: %s -[abc]\n", argv[0]);
