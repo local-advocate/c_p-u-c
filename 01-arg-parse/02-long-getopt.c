@@ -63,7 +63,12 @@ int main(int argc, char **argv){
 	{	
 		// options that set flag
 		{"help", 0, &help_flag, 1},		// argument sets help flag and sets value = 1
-		{"usage", 0, &help_flag, 0},
+
+		// options that set value
+		{"opta", 0, 0, 'a'},
+		{"optb", 1, 0, 'b'}, 
+		{"optc", 2, 0, 'c'},
+		
 		{0, 0, 0, 0}				// null terminate
 	};
 
@@ -90,10 +95,4 @@ int main(int argc, char **argv){
 
 
 	/* implementing flags now */
-	if (help_flag) {
-		if (*help_flag == 0) {
-			printf("USAGE MESSAGE\n");
-		}
-		else {
-			printf("HELP MESSAGE\n");
 }
