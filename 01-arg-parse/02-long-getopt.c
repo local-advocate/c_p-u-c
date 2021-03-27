@@ -73,8 +73,10 @@ int main(int argc, char **argv){
 	};
 
 	char *shortopts = ":ab:c::";
-	int aflag, bflag, cflag;
-	
+
+	int aflag, bflag, cflag;			// would be set to one if option enc for later
+	char *barg, *carg; 				// arguments for bflag and cflag
+
 	while ((c = getopt_long (argc, argv, shortopts, longopts, &option_index)) != -1) {
 
 		switch (c) {
@@ -87,7 +89,18 @@ int main(int argc, char **argv){
 				break;
 			
 			case 'a':
-				aflag = 1;
+				aflag = 1;		// to process it later
+				break;
+
+			case 'b':
+				bflag = 1;
+				barg = optarg;		// barg requires argument
+				break;
+
+			case 'c':
+				cflag = 1;
+				if (optarg) 
+					carg = optarg;	// if argument provided
 				break;
 
 			default:
@@ -102,5 +115,8 @@ int main(int argc, char **argv){
 	/* implementing flags now */
 	if (aflag) {
 		printf("--opta or -a encountered\n");
+	}
+	if (bflag) {
+		printf("--optb or -b encountered. given argument: %s\n", barg);
 	}
 }
