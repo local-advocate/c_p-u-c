@@ -74,7 +74,7 @@ int main(int argc, char **argv){
 
 	char *shortopts = ":ab:c::";
 
-	int aflag, bflag, cflag;			// would be set to one if option enc for later
+	int aflag = 0, bflag = 0, cflag = 0;			// would be set to one if option enc for later
 	char *barg, *carg; 				// arguments for bflag and cflag
 
 	while ((c = getopt_long (argc, argv, shortopts, longopts, &option_index)) != -1) {
@@ -118,5 +118,10 @@ int main(int argc, char **argv){
 	}
 	if (bflag) {
 		printf("--optb or -b encountered. given argument: %s\n", barg);
+	}
+	if (cflag) {
+		printf("--optc or -c encountered.");
+		if (carg) printf(" given argument: %s", carg);
+		printf("\n");
 	}
 }
