@@ -114,6 +114,16 @@ int main(int argc, char **argv){
 	}
 
 
+	/* print unknown options (not in correct format)*/
+	if (optind != argc) {
+		for (int i = optind; i < argc; i++) {
+			printf("Unknown option: %s\n", argv[i]);
+		}
+		printf("\n");
+		//exit (-1);
+	}
+
+
 	/* implementing flags now */
 	if (aflag) {
 		printf("-a or --opta encountered\n");
