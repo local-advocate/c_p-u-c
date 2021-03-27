@@ -58,11 +58,12 @@ int main(){
 	char str2[] = "12a.a12";
 	char *str3 = "45a.)))";
 	char str5[] = "109988772a";
+	const char *str6 = "-29943239814092348";
 	char *str4 = NULL;
 
 	long int l1 = 129900388833l;
-	long int l2;
-		
+	long int l2 = 0l;
+	unsigned long int l3 = 0uL;
 
 	// string to double
 	if ((d2 = atof(str2)) != 0) {
@@ -89,7 +90,7 @@ int main(){
 	}
 	
 	// string to long int (in base b) w/ pointer to str value start [base range: [2,36]]. base 0 = atoi
-	int base = 2;
+	int base = 10;
 	if ((l2 = strtol(str5, &str4, base)) != 0) {
 		printf("String %s (base %d) in long is %ld (base %d) ; Remaining string: %s\n", str5, base,  l2, 10, str4);
 	}
@@ -97,12 +98,12 @@ int main(){
 		printf("ERR OR ZERO. String: %s. Long: %ld (base %d)\n", str5, l2, base);
 	}
 
-	// string to unsigned long
-	if ((l2 = strtol(str5, &str4, base)) != 0) {
-		printf("String %s (base %d) in long is %ld (base %d) ; Remaining string: %s\n", str5, base,  l2, 10, str4);
+	// string to unsigned long (will convert negative to positive if str starts with -)
+	if ((l3 = strtoul(str6, &str4, base)) != 0 && str6[0] != '-') {
+		printf("String %s (base %d) in ulong is %lu (base %d) ; Remaining string: %s\n", str6, base,  l3, 10, str4);
 	}
 	else {
-		printf("ERR OR ZERO. String: %s. Long: %ld (base %d)\n", str5, l2, base);
+		printf("ERR OR ZERO. String: %s. uLong: %lu (from base %d)\n", str6, l3, base);
 	}
 }
 
