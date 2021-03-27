@@ -4,7 +4,6 @@
 
 int main(){
 
-
 	/* STDLIB TYPE CONVERSION
 	 * 
 	 * FUNCTIONS
@@ -36,9 +35,8 @@ int main(){
 	 * long int strtol(const char *str, char **endptr, int base) : same as strtod, but from base b to decimal
 	 *
 	 * long int strtoul(const char *str, char **endptr, int base) : same as strtod, but return in base
-	 * 							       test diff bases (and for zero)	
+	 * 							        warning: will convert neg to pos
 	 */
-
 
 
 	int i1 = 10;
@@ -105,5 +103,19 @@ int main(){
 	else {
 		printf("ERR OR ZERO. String: %s. uLong: %lu (from base %d)\n", str6, l3, base);
 	}
+
+
+	/* 
+	 * ctype ref (more ref at: https://code-reference.com/c/ctype.h)
+	 *
+	 * int alnum(int c)		:	returns non-zero if alphanumeric (0-9, a-z, A-Z), else zero
+	 * int alpha(int c)		:	returns non-zero if alphabetic   (a-z, A-Z)     , else zero
+	 * int iscntrl(int c)		:	returns non-zero if control char (ascii 0-1F,7F), else zero
+	 *
+	 * int tolower(int c)		:	return lowercase of c if possible else c 
+	 *
+	 * int toascii(int c)		:	returns c ascii value
+	 *
+	 */
 }
 
