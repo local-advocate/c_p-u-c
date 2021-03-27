@@ -47,5 +47,18 @@
 
 int main(int argc, char **argv){
 
+	if (argc < 2) {
+		printf("Usage: %s [flags]\n", argv[0]);
+		exit(-1);
+	}
 
+
+	int c; 						// return value of getopt_long
+	int option_index = 0;				// index of current option
+	
+	static struct option long_options[] = 		// array of struct option
+	{
+		{"help", no_argument, &help_flag, 1},	// argument sets help flag to value = 1
+		{0, 0, 0, 0}				// null terminate
+	};
 }
