@@ -72,7 +72,8 @@ int main(int argc, char **argv){
 		{0, 0, 0, 0}				// null terminate
 	};
 
-	char *shortopts = "a";
+	char *shortopts = ":ab:c::";
+	int aflag, bflag, cflag;
 	
 	while ((c = getopt_long (argc, argv, shortopts, longopts, &option_index)) != -1) {
 
@@ -83,6 +84,10 @@ int main(int argc, char **argv){
 				if (longopts[option_index].has_arg) {
 					printf("Argument: %s\n", optarg);
 				}
+				break;
+			
+			case 'a':
+				aflag = 1;
 				break;
 
 			default:
@@ -95,4 +100,7 @@ int main(int argc, char **argv){
 
 
 	/* implementing flags now */
+	if (aflag) {
+		printf("--opta or -a encountered\n");
+	}
 }
