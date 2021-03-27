@@ -44,6 +44,7 @@
  * (first searches longopts and then short)
  */
 
+	int help_flag = 0;
 
 int main(int argc, char **argv){
 
@@ -55,10 +56,33 @@ int main(int argc, char **argv){
 
 	int c; 						// return value of getopt_long
 	int option_index = 0;				// index of current option
+	// int has_arg;					// 0: no arg, 1: required, 2: optional
 	
-	static struct option long_options[] = 		// array of struct option
+
+	static struct option longopts[] = 		// array of struct option
 	{
-		{"help", no_argument, &help_flag, 1},	// argument sets help flag to value = 1
+		{"help", 1, &help_flag, 1},	// argument sets help flag to value = 1
 		{0, 0, 0, 0}				// null terminate
 	};
+
+	char *shortopts = "a";
+	
+	while ((c = getopt_long (argc, argv, shortopts, longopts, &option_index)) != -1) {
+
+		switch (c) {
+			
+			case 0:				// option sets a flag
+				printf("Option %s sets flag. Val = %d.\n", longopts[option_index].name, longopts[option_index].val); 			
+				if (longopts[option_index].has_arg) {
+					printf("Argument: %s\n", optarg);
+				}
+				break;
+
+			default:
+				printf("DEFAULT\n");
+				exit(-1);
+
+		}
+
+	}
 }
