@@ -39,7 +39,7 @@
  * -1 if done processing (compare optind and argc for remaining arguments)
  *
  *
- * other: (legacy)
+ * other: (legacy) (warning: optional arg :: does not work well)
  * int getopt_long_only(same as above) can take long options starting with - instead of -- 
  * (first searches longopts and then short)
  */
@@ -56,6 +56,7 @@ int main(int argc, char **argv){
 
 	int c; 						// return value of getopt_long
 	int option_index = 0;				// index of current option
+	int *indexptr;
 	// int has_arg;					// 0: no arg, 1: required, 2: optional
 	
 
@@ -72,10 +73,10 @@ int main(int argc, char **argv){
 		{0, 0, 0, 0}				// null terminate
 	};
 
-	char *shortopts = ":ab:c::";
+	char *shortopts = ":ab:";
 
-	int aflag = 0, bflag = 0, cflag = 0;			// would be set to one if option enc for later
-	char *barg, *carg; 				// arguments for bflag and cflag
+	int aflag = 0, bflag = 0;			// would be set to one if option enc for later
+	char *barg;	 				// arguments for bflag
 
 	while ((c = getopt_long (argc, argv, shortopts, longopts, &option_index)) != -1) {
 
@@ -96,11 +97,9 @@ int main(int argc, char **argv){
 				bflag = 1;
 				barg = optarg;		// barg requires argument
 				break;
-
-			case 'c':
-				cflag = 1;
-				if (optarg) 
-					carg = optarg;	// if argument provided
+			
+			case ':':
+				printf("Option '%s or %c' requires an argument.\n", longopts[optind].name, optopt);
 				break;
 
 			default:
@@ -118,10 +117,5 @@ int main(int argc, char **argv){
 	}
 	if (bflag) {
 		printf("--optb or -b encountered. given argument: %s\n", barg);
-	}
-	if (cflag) {
-		printf("--optc or -c encountered.");
-		if (carg) printf(" given argument: %s", carg);
-		printf("\n");
 	}
 }
