@@ -33,8 +33,8 @@ int main(){
 	 *						   123.12a -- dbret: 123.120, endptr: &"a"
 	 *						   123.123 -- dbret: 123.123, endptr: &(not null ptr)
 	 *
-	 * long int strtol(const char *str, char **endptr, int base) : same as strtod, but return in base
-	 * 							       test diff bases (and for zero)	
+	 * long int strtol(const char *str, char **endptr, int base) : same as strtod, but from base b to decimal
+	 *
 	 * long int strtoul(const char *str, char **endptr, int base) : same as strtod, but return in base
 	 * 							       test diff bases (and for zero)	
 	 */
@@ -57,9 +57,11 @@ int main(){
 	char *str1  = "string1";
 	char str2[] = "12a.a12";
 	char *str3 = "45a.)))";
+	char str5[] = "109988772a";
 	char *str4 = NULL;
 
 	long int l1 = 129900388833l;
+	long int l2;
 		
 
 	// string to double
@@ -79,11 +81,28 @@ int main(){
 	}
 
 	// string to int
-	if ((i2 = atof(str3)) != 0) {
+	if ((i2 = atoi(str3)) != 0) {
 		printf("String %s in integer is %d\n", str3, i2);
 	}
 	else {
 		printf("ERR OR ZERO. String: %s. Integer: %d\n", str3, i2);
+	}
+	
+	// string to long int (in base b) w/ pointer to str value start [base range: [2,36]]. base 0 = atoi
+	int base = 2;
+	if ((l2 = strtol(str5, &str4, base)) != 0) {
+		printf("String %s (base %d) in long is %ld (base %d) ; Remaining string: %s\n", str5, base,  l2, 10, str4);
+	}
+	else {
+		printf("ERR OR ZERO. String: %s. Long: %ld (base %d)\n", str5, l2, base);
+	}
+
+	// string to unsigned long
+	if ((l2 = strtol(str5, &str4, base)) != 0) {
+		printf("String %s (base %d) in long is %ld (base %d) ; Remaining string: %s\n", str5, base,  l2, 10, str4);
+	}
+	else {
+		printf("ERR OR ZERO. String: %s. Long: %ld (base %d)\n", str5, l2, base);
 	}
 }
 
