@@ -60,8 +60,10 @@ int main(int argc, char **argv){
 	
 
 	static struct option longopts[] = 		// array of struct option
-	{
-		{"help", 1, &help_flag, 1},	// argument sets help flag to value = 1
+	{	
+		// options that set flag
+		{"help", 0, &help_flag, 1},		// argument sets help flag and sets value = 1
+		{"usage", 0, &help_flag, 0},
 		{0, 0, 0, 0}				// null terminate
 	};
 
@@ -85,4 +87,13 @@ int main(int argc, char **argv){
 		}
 
 	}
+
+
+	/* implementing flags now */
+	if (help_flag) {
+		if (*help_flag == 0) {
+			printf("USAGE MESSAGE\n");
+		}
+		else {
+			printf("HELP MESSAGE\n");
 }
