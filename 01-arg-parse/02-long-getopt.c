@@ -98,8 +98,11 @@ int main(int argc, char **argv){
 				barg = optarg;		// barg requires argument
 				break;
 			
-			case ':':
-				printf("Option '%s or %c' requires an argument.\n", longopts[optind].name, optopt);
+			case ':':			// arg required but not found
+				printf("Option '-%c or --%s' requires an argument.\n", optopt, longopts[optind].name);
+				exit(-1);
+
+			case '?':
 				break;
 
 			default:
@@ -113,9 +116,9 @@ int main(int argc, char **argv){
 
 	/* implementing flags now */
 	if (aflag) {
-		printf("--opta or -a encountered\n");
+		printf("-a or --opta encountered\n");
 	}
 	if (bflag) {
-		printf("--optb or -b encountered. given argument: %s\n", barg);
+		printf("-b or --optb encountered. given argument: %s\n", barg);
 	}
 }
